@@ -1,0 +1,26 @@
+﻿<div ng:controller="ItemCtrl">
+	<form action="/service/item.cfc?method=create" method="get" ng:submit="addItem()">
+		<input type="text" name="noteText" size="33" placeholder="enter note here">
+		<input type="text" name="URLtext" size="44" placeholder="enter URL here">
+		<input type="submit" value="add"><br>
+		<span>{{remaining()}} remaining</span>
+		<input type="button" ng:click="removeActive()" value="clean up">
+	</form>
+
+	<ul>
+		<li ng:repeat="item in items">
+			<input name="ID" type="hidden" value="{{item.ID}}">
+			<input class="ui-corner-left ui-widget-content" name="item.Active" type="checkbox">
+			<span class="ui-corner-left ui-state-default" ng:class="'active-' + item.Active">
+				<a ng:click="item.Active = !item.Active">
+					{{item.Note}}
+				</a>
+			</span>
+			<span class="ui-corner-right ui-widget-content" ng:class="'active-' + item.Active">
+				<a href="{{item.URL}}" target="_blank">
+					{{item.URL}}
+				</a>
+			</span>
+		</li>
+	</ul>
+</div>
