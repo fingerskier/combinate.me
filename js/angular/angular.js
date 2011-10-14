@@ -1,8 +1,3 @@
-/**
- * @license AngularJS v0.9.19
- * (c) 2010-2011 AngularJS http://angularjs.org
- * License: MIT
- */
 'use strict';
 (function(window, document, undefined){
 
@@ -11,29 +6,9 @@
 if (typeof document.getAttribute == $undefined)
   document.getAttribute = function() {};
 
-/**
- * @workInProgress
- * @ngdoc function
- * @name angular.lowercase
- * @function
- *
- * @description Converts string to lowercase
- * @param {string} string String to be lowercased.
- * @returns {string} Lowercased string.
- */
 var lowercase = function (string){ return isString(string) ? string.toLowerCase() : string; };
 
 
-/**
- * @workInProgress
- * @ngdoc function
- * @name angular.uppercase
- * @function
- *
- * @description Converts string to uppercase.
- * @param {string} string String to be uppercased.
- * @returns {string} Uppercased string.
- */
 var uppercase = function (string){ return isString(string) ? string.toUpperCase() : string; };
 
 
@@ -90,7 +65,6 @@ var _undefined        = undefined,
     PRIORITY_LAST     =  99999,
     PRIORITY          = {'FIRST': PRIORITY_FIRST, 'LAST': PRIORITY_LAST, 'WATCH':PRIORITY_WATCH},
     Error             = window.Error,
-    /** holds major version number for IE or NaN for real browsers */
     msie              = parseInt((/msie (\d+)/.exec(lowercase(navigator.userAgent)) || [])[1], 10),
     jqLite,           // delay binding since jQuery could be loaded after us.
     jQuery,           // delay binding
@@ -100,23 +74,14 @@ var _undefined        = undefined,
                            ? bind(window[$console], window[$console]['error'] || noop)
                            : noop,
 
-    /** @name angular */
     angular           = window[$angular] || (window[$angular] = {}),
-    /** @name angular.markup */
     angularTextMarkup = extensionMap(angular, 'markup'),
-    /** @name angular.attrMarkup */
     angularAttrMarkup = extensionMap(angular, 'attrMarkup'),
-    /** @name angular.directive */
     angularDirective  = extensionMap(angular, 'directive'),
-    /** @name angular.widget */
     angularWidget     = extensionMap(angular, 'widget', lowercase),
-    /** @name angular.validator */
     angularValidator  = extensionMap(angular, 'validator'),
-    /** @name angular.fileter */
     angularFilter     = extensionMap(angular, 'filter'),
-    /** @name angular.formatter */
     angularFormatter  = extensionMap(angular, 'formatter'),
-    /** @name angular.service */
     angularService    = extensionMap(angular, 'service'),
     angularCallbacks  = extensionMap(angular, 'callbacks'),
     nodeName_,
@@ -124,34 +89,6 @@ var _undefined        = undefined,
     uid               = ['0', '0', '0'],
     DATE_ISOSTRING_LN = 24;
 
-/**
- * @workInProgress
- * @ngdoc function
- * @name angular.forEach
- * @function
- *
- * @description
- * Invokes the `iterator` function once for each item in `obj` collection. The collection can either
- * be an object or an array. The `iterator` function is invoked with `iterator(value, key)`, where
- * `value` is the value of an object property or an array element and `key` is the object property
- * key or array element index. Optionally, `context` can be specified for the iterator function.
- *
- * Note: this function was previously known as `angular.foreach`.
- *
-   <pre>
-     var values = {name: 'misko', gender: 'male'};
-     var log = [];
-     angular.forEach(values, function(value, key){
-       this.push(key + ': ' + value);
-     }, log);
-     expect(log).toEqual(['name: misko', 'gender:male']);
-   </pre>
- *
- * @param {Object|Array} obj Object to iterate over.
- * @param {function()} iterator Iterator function.
- * @param {Object} context Object to become context (`this`) for the iterator function.
- * @returns {Object|Array} Reference to `obj`.
- */
 function forEach(obj, iterator, context) {
   var key;
   if (obj) {
@@ -3168,7 +3105,7 @@ function Browser(window, document, body, XHR, $log) {
    * @param {object=} header additional HTTP headers to send with XHR.
    *   Standard headers are:
    *   <ul>
-   *     <li><tt>Content-Type</tt>: <tt>application/x-www-form-urlencoded</tt></li>
+   *     <li><tt>Content-Type</tt>: <tt>application/json</tt></li>
    *     <li><tt>Accept</tt>: <tt>application/json, text/plain, &#42;/&#42;</tt></li>
    *     <li><tt>X-Requested-With</tt>: <tt>XMLHttpRequest</tt></li>
    *   </ul>
@@ -8181,7 +8118,7 @@ angularServiceInject('$xhr.error', function($log){
  *   - `Accept: application/json, text/plain, *\/*`
  *   - `X-Requested-With: XMLHttpRequest`
  * - `$xhr.defaults.headers.post` (header defaults for HTTP POST requests):
- *   - `Content-Type: application/x-www-form-urlencoded`
+ *   - `Content-Type: application/json`
  *
  * To add or overwrite these defaults, simple add or remove a property from this configuration
  * object. To add headers for an HTTP method other than POST, simple create a new object with name
@@ -8329,7 +8266,7 @@ angularServiceInject('$xhr', function($browser, $error, $log, $updateView){
       "Accept": "application/json, text/plain, */*",
       "X-Requested-With": "XMLHttpRequest"
     },
-    post: {'Content-Type': 'application/x-www-form-urlencoded'},
+    post: {'Content-Type': 'application/json'},
     get: {},      // all these empty properties are needed so that client apps can just do:
     head: {},     // $xhr.defaults.headers.head.foo="bar" without having to create head object
     put: {},      // it also means that if we add a header for these methods in the future, it

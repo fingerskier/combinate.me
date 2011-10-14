@@ -41,4 +41,12 @@
 	    <cfargument name="ApplicationScope" required="true">
 
 	</cffunction>
+
+	<cffunction name="onMissingTemplate" returnType="boolean">
+	    <cfargument type="string" name="targetPage" required=true/>
+
+    	<cfoutput>#arguments.targetPage# does not exist!!!</cfoutput>
+
+	    <cfreturn true>
+	</cffunction>
 </cfcomponent>
